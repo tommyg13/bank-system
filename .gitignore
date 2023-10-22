@@ -1,0 +1,33 @@
+# Node.js
+node_modules/
+
+# Output of JavaScript transpilers
+dist/
+build/
+*.js
+
+# Output of package managers
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Log files
+*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+todo.txt
