@@ -91,10 +91,12 @@ class BankHeader extends HTMLElement {
       .replace("/pages/", "")
       .replace(".html", "")
       .toUpperCase();
-
+    const isDev = window.location.href.includes("127.");
     if (!user) {
       if (currentRoute !== "LOGIN" && currentRoute !== "REGISTER") {
-        window.location.href = "/pages/login.html";
+        window.location.href = isDev
+          ? "/pages/login.html"
+          : "/bank-system/pages/login.html";
       }
       navItems = ["Login", "Register"];
     } else {
@@ -107,7 +109,9 @@ class BankHeader extends HTMLElement {
         li.classList.add("active");
       }
       const anchor = document.createElement("a");
-      anchor.href = `/pages/${item.toLowerCase()}.html`;
+      anchor.href = `${
+        isDev ? "" : "/bank-system"
+      }/pages/${item.toLowerCase()}.html`;
       anchor.textContent = item;
       li.appendChild(anchor);
       menu.appendChild(li);

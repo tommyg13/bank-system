@@ -1,4 +1,4 @@
-import { addToStorage, getFromStorage } from "./app.js";
+import { addToStorage, getFromStorage, isDev } from "./app.js";
 import FormHandler from "./formHandler.js";
 
 class AuthFormHandler extends FormHandler {
@@ -37,7 +37,7 @@ class AuthFormHandler extends FormHandler {
       this.addToStorage("users", this.usersList);
     }
 
-    window.location.href = "/";
+    window.location.href = isDev ? "/" : "/bank-system";
   }
 }
 
