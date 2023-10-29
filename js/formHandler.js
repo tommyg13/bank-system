@@ -1,16 +1,17 @@
 class FormHandler {
-  constructor(form, formAction) {
+  constructor(form) {
     if (this.constructor == FormHandler) {
       throw new Error("Abstract classes can't be instantiated.");
     }
-    this.formAction = formAction;
     this.form = form;
     this.errors = [];
+    this.formData = {};
   }
 
   processForm() {
     this.clearErrors();
-    if (this.checkForErrors().length) {
+    this.checkForErrors();
+    if (this.errors.length) {
       this.displayErrors();
       return;
     } else {
@@ -26,52 +27,55 @@ class FormHandler {
         formData[el.getAttribute("name")] = el.value;
       }
     });
-    this[this.formAction](formData);
+    this.formData = formData;
   }
 
   clearErrors() {
-    this.form.querySelectorAll("p.error").forEach(function (el) {
-      el.remove();
-    });
+    if (this.form) {
+      this.form.querySelectorAll("p.error").forEach((el) => {
+        el.remove();
+      });
+    }
     this.errors = [];
   }
 
   displayErrors() {
-    this.errors.forEach(function (el) {
+    this.errors.forEach((el) => {
       const error = document.createElement("p");
-      const currentElement = document.querySelector(`#${el}`);
+      const currentElement = document.getElementById(el);
       error.classList.add("error");
-      error.textContent = `Please fill ${currentElement.getAttribute(
-        "placeholder"
-      )}`;
+      if (currentElement) {
+        error.textContent = `Please fill ${currentElement.getAttribute(
+          "placeholder"
+        )}`;
 
-      currentElement.previousSibling.before(error);
+        currentElement.previousSibling.before(error);
+      }
     });
   }
 
   checkForErrors() {
-    const errors = this.errors;
-
+    const errors = [];
     if (!this.form) {
       errors.push("submit");
-    }
-
-    const formElements = this.form.querySelectorAll("input, textarea");
-    formElements.forEach(function (el) {
-      if (el.required) {
-        const value = el.value?.trim();
-        if (value.length === 0) {
-          errors.push(el.id);
-        } else {
-          const type = el.getAttribute("type");
-          if (type === "email" && !this.isValidEmail(value)) {
+    } else {
+      const formElements = this.form.querySelectorAll("input, textarea");
+      //second parameter of foereach is thisArg so i convert it to arrow function to make this inherited from class
+      formElements.forEach((el) => {
+        if (el.required) {
+          const value = el.value?.trim();
+          if (value.length === 0) {
             errors.push(el.id);
+          } else {
+            const type = el.getAttribute("type");
+            if (type === "email" && !this.isValidEmail(value)) {
+              errors.push(el.id);
+            }
           }
         }
-      }
-    });
-
-    return errors;
+      });
+    }
+    this.errors = errors;
   }
 
   isValidEmail(email) {

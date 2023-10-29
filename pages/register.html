@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register page</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script defer src="/components/header.js"></script>
+    <script defer src="/js/auth.js" type='module'></script>
+</head>
+<body>
+    <bank-header></bank-header>
+    <main>
+    <form id="register" class="auth-form">
+        <div>
+        <label>Name</label>
+        <input placeholder="Name" id="name" name="name" required/>
+    </div>
+        <button id="register-btn" type="submit">Register</button>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "bank-system",
+  "version": "1.0.0",
+  "description": "url --> https://tommyg13.github.io/bank-system/",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommyg13/bank-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tommyg13/bank-system/issues"
+  },
+  "homepage": "https://github.com/tommyg13/bank-system#readme",
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.6"
+  }
+}

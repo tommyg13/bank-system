@@ -1,0 +1,29 @@
+*, *::before,*::after {
+    box-sizing: border-box;
+  }
+
+  :root{
+    --main-bg:#f8f8f8
+  }
+  
+ html,body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body{
+background-color: var(--main-bg);
+  }
+
+  img{
+    max-width: 100%;
+  }
+
+  li{
+    list-style:unset
+  }
+
+  main {
+    margin-top: 150px;
+    padding-inline: 20px;
+  }

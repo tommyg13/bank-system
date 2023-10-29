@@ -3,33 +3,40 @@ import FormHandler from "./formHandler.js";
 
 class AuthFormHandler extends FormHandler {
   constructor(form, formAction, usersList, addToStorage) {
-    super(form, formAction);
+    super(form);
     this.usersList = usersList;
     this.addToStorage = addToStorage;
+    this.formAction = formAction;
   }
 
-  register(formUserData) {
-    const user = this.usersList.find((user) => user.id === formUserData.id);
+  register() {
+    const user = this.usersList.find((user) => user.id === this.formData.id);
     if (!user) {
-      this.saveUserData(formUserData, true);
+      this.saveUserData(true);
     }
   }
 
-  login(formUserData) {
-    const user = this.usersList.find((user) => user.id === formUserData.id);
-    if (!user || user.password !== formUserData.password) {
+  login() {
+    const user = this.usersList.find((user) => user.id === this.formData.id);
+    if (!user || user.password !== this.formData.password) {
       this.handleLoginError();
     } else {
-      this.saveUserData(formUserData, false);
+      this.saveUserData(false);
     }
   }
 
-  saveUserData(userData, isRegister) {
-    this.addToStorage("user", userData);
+  processFormData() {
+    super.processFormData();
+    this[this.formAction]();
+  }
+
+  saveUserData(isRegister) {
+    this.addToStorage("user", this.formData);
     if (isRegister) {
-      this.usersList.push(userData);
+      this.usersList.push(this.formData);
       this.addToStorage("users", this.usersList);
     }
+
     window.location.href = "/";
   }
 }
